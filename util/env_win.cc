@@ -68,7 +68,9 @@ namespace leveldb {
 		}
 
 		static std::wstring GetFullPath(const std::string& fname) {
-			return ::port::toFilePath(fname);
+			std::string fullPath = ::port::toFilePath(fname);
+			std::wstring fullPathW = std::wstring(fullPath.begin(),fullPath.end());
+			return fullPathW;
 		}
 
 		static void EnsureDirectory(const std::string& fname)

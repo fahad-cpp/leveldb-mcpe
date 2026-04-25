@@ -19,22 +19,19 @@ if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_EXTENSIONS OFF)
 endif(NOT CMAKE_CXX_STANDARD)
 
-add_library(leveldb_mcpe SHARED)
+add_library(leveldb_mcpe)
 
 if (WIN32)
 	# set windows 7 as the minimum version
 	add_definitions(-DWIN32)
 	add_definitions(-D_WIN32_WINNT=0x0601)
 	add_definitions(-DLEVELDB_PLATFORM_WINDOWS)
-    target_compile_definitions(leveldb_mcpe PRIVATE "DLLX=__declspec(dllexport)")
 elseif(APPLE)
     add_definitions(-DLEVELDB_PLATFORM_POSIX)
     add_definitions(-DOS_MACOSX)
     set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15")
-    target_compile_definitions(leveldb_mcpe PRIVATE "DLLX=")
 elseif(UNIX)
     add_definitions(-DLEVELDB_PLATFORM_POSIX)
-    target_compile_definitions(leveldb_mcpe PRIVATE "DLLX=")
 endif()
 
 target_include_directories(leveldb_mcpe PRIVATE ${ZLIB_INCLUDE_DIRS})
